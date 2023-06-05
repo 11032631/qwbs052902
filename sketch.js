@@ -16,7 +16,7 @@ let classifier;
 let label = "listening";
 
 // Teachable Machine model URL:
-let soundModelURL = 'https://11032631.github.io/qwbs052902/model.json';
+let soundModelURL = ' https://11032631.github.io/qwbs052902/;
 
 
 function preload() {
@@ -28,7 +28,9 @@ function setup() {
   createCanvas(320, 240);
   // Start classifying
   // The sound model will continuously listen to the microphone
+  ThunkableWebviewerExtension.postMessage("ready");
   classifier.classify(gotResult);
+  
 }
 
 function draw() {
@@ -50,4 +52,5 @@ function gotResult(error, results) {
   // The results are in an array ordered by confidence.
   // console.log(results[0]);
   label = results[0].label;
+  ThunkableWebviewerExtension.postMessage(label);
 }
